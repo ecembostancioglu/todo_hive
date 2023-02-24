@@ -20,6 +20,14 @@ class MyApp extends StatelessWidget {
                 color: ColorConstants.titleColor,
               ),
                 textTheme: TextTheme(
+                  headlineLarge:TextStyle(
+                      color: ColorConstants.titleColor,
+                      fontSize: 48.sp
+                  ),
+                    titleLarge:TextStyle(
+                        color: ColorConstants.titleColor,
+                        fontSize: 24.sp
+                    ),
                     titleMedium: TextStyle(
                         color: ColorConstants.titleColor,
                         fontSize: 18.sp
