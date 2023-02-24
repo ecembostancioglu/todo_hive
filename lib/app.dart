@@ -14,6 +14,12 @@ class MyApp extends StatelessWidget {
           return  MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
+              textTheme: TextTheme(
+                titleMedium: TextStyle(
+                  color: ColorConstants.titleColor,
+                  fontSize: 18.sp
+                )
+              ),
                 fontFamily: 'Didot',
                 primarySwatch: ColorConstants.themeDataPrimaryColor,
                 appBarTheme: AppBarTheme(

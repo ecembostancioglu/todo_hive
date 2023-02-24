@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo_hive/constants/color_constants.dart';
 import 'package:todo_hive/constants/text_constants.dart';
 import 'package:todo_hive/constants/widgets/alert_widget.dart';
 
@@ -15,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(TextConstants.appBarTitle),
+        title:const Text(TextConstants.appBarTitle),
         actions: [
           IconButton(
               onPressed: (){},

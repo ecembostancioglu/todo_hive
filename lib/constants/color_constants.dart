@@ -6,6 +6,7 @@ class ColorConstants{
   static const Color scaffoldColor=Color(0xfffaf2ef);
   static const Color primaryColor=Color(0xFFC89F9C);
   static const Color hintTextColor=Color(0x593F2A2A);
+  static const Color titleColor=Color(0xff7d4f50);
   static const MaterialColor themeDataPrimaryColor= MaterialColor(0xFFC89F9C,color);
 }
 

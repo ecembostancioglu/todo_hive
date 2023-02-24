@@ -12,7 +12,8 @@ class AlertWidget{
             shape:RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20)
             ),
-            title: const Text(TextConstants.gorevEkle),
+            title: Text(TextConstants.gorevEkle,
+            style: Theme.of(context).textTheme.titleMedium),
             content: const TextField(
               style: TextStyle(
                   color: ColorConstants.primaryColor
