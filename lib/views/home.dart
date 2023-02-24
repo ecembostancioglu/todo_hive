@@ -37,8 +37,12 @@ class _HomePageState extends State<HomePage> {
             context: context,
             builder: (context){
             return AlertDialog(
-              title: Text("My title"),
-              content: Text("This is my message."),
+              title: const Text(TextConstants.gorevEkle),
+              content: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Görev giriniz'
+                ),
+              ),
               actions: [
              TextButton(
               child: Text("OK"),
