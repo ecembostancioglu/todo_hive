@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class ColorConstants{
   static const Color transparent=Colors.transparent;
   static const Color white=Colors.white;
+  static const Color scaffoldColor=Color(0xfffaf2ef);
   static const Color primaryColor=Color(0xFFC89F9C);
+  static const Color hintTextColor=Color(0x593F2A2A);
   static const MaterialColor themeDataPrimaryColor= MaterialColor(0xFFC89F9C,color);
 }
 
