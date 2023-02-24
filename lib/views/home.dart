@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                                   bottomRight:Radius.circular(20)),
                             ),
                             child: time == null
-                                ? Center(child: Text('${DateTime.now().hour}'))
+                                ? Center(child: Text('${DateTime.now().minute}'))
                                 : Center(child: Text('${time}')),
                           ),
                         ],
