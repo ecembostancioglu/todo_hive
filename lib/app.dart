@@ -10,12 +10,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: ColorConstants().themeDataPrimaryColor,
+        primarySwatch: ColorConstants.themeDataPrimaryColor,
         appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            color: ColorConstants.primaryColor,
+            fontSize:22
+          ),
           elevation: 0,
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(
-            color: Colors.black
+            color: ColorConstants.primaryColor
           )
         )
       ),

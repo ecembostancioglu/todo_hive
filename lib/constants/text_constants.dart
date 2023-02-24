@@ -1,3 +1,3 @@
 class TextConstants{
-  final String appBarTitle='Bugün ne yapacaksın?';
+  static const String appBarTitle='Bugün Neler Yapacaksın?';
 }

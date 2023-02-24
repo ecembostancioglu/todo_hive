@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ColorConstants{
-  final Color transparent=Colors.transparent;
-  final MaterialColor themeDataPrimaryColor= MaterialColor(0xFFC89F9C,color);
+  static const Color transparent=Colors.transparent;
+  static const Color white=Colors.white;
+  static const Color primaryColor=Color(0xFFC89F9C);
+  static const MaterialColor themeDataPrimaryColor= MaterialColor(0xFFC89F9C,color);
 }
 
 const Map<int, Color> color =

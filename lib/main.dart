@@ -7,7 +7,7 @@ import 'package:todo_hive/constants/color_constants.dart';
 
 Future<void> main() async{
   SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: ColorConstants().transparent));
+      SystemUiOverlayStyle(statusBarColor: ColorConstants.transparent));
   await Hive.initFlutter();
   runApp(const MyApp());
 }
