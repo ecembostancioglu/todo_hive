@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_hive/bloc/todo_bloc.dart';
 import 'package:todo_hive/constants/color_constants.dart';
 import 'package:todo_hive/views/home.dart';
 
@@ -11,15 +13,18 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize:const Size(360, 690),
         builder: (context,widget){
-          return  MaterialApp(
+          return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              textTheme: TextTheme(
-                titleMedium: TextStyle(
-                  color: ColorConstants.titleColor,
-                  fontSize: 18.sp
-                )
+              iconTheme: IconThemeData(
+                color: ColorConstants.titleColor,
               ),
+                textTheme: TextTheme(
+                    titleMedium: TextStyle(
+                        color: ColorConstants.titleColor,
+                        fontSize: 18.sp
+                    )
+                ),
                 fontFamily: 'Didot',
                 primarySwatch: ColorConstants.themeDataPrimaryColor,
                 appBarTheme: AppBarTheme(
@@ -34,7 +39,7 @@ class MyApp extends StatelessWidget {
                         color: ColorConstants.primaryColor
                     )
                 ),
-              scaffoldBackgroundColor: ColorConstants.scaffoldColor
+                scaffoldBackgroundColor: ColorConstants.scaffoldColor
             ),
             home: HomePage(),
           );
