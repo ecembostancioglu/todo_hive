@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import '../color_constants.dart';
 import '../text_constants.dart';
 
@@ -30,6 +31,16 @@ class AlertWidget{
                 child: const Text(TextConstants.ekle),
                 onPressed: () {
                   Navigator.pop(context);
+                  DatePicker.showTimePicker(
+                      context,showSecondsColumn: false,
+                      onConfirm: (time){},
+                      theme:const DatePickerTheme(
+                        doneStyle: TextStyle(
+                          color: ColorConstants.titleColor,
+                          fontWeight: FontWeight.w500
+                        ),
+                        headerColor: ColorConstants.scaffoldColor
+                      ) );
                 },
               )
             ],
