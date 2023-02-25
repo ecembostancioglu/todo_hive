@@ -57,14 +57,14 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Text(state.allTodos[index].name.capitalize()),
-                    trailing: Text('${state.allTodos[index].createdAt.hour}: ${state.allTodos[index].createdAt.minute}'),
+                    trailing: Text('${state.allTodos[index].createdAt.hour}:${state.allTodos[index].createdAt.minute}'),
                   );
                 });
           }
-        return CircularProgressIndicator();
+          return CircularProgressIndicator();
         },
-
       ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
             showDialog(
@@ -126,8 +126,6 @@ class _HomePageState extends State<HomePage> {
                           createdAt:DateTime.now());
                       BlocProvider.of<TodoBloc>(context).add(AddTodo(todo: newTodo));
                       Navigator.pop(context);
-
-
                     },
                   )
                 ],
