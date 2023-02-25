@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_hive/constants/text_constants.dart';
-
 import '../bloc/todo_bloc.dart';
 import '../constants/color_constants.dart';
 import '../model/todo.dart';
@@ -22,8 +20,6 @@ class _HomePageState extends State<HomePage> {
   late List<Todo> _allTodos;
   TextEditingController textEditingController=TextEditingController();
   var newTodo;
-  DateTime? time;
-
 
   String formattedDay=DateFormat.d().format(DateTime.now());
   String formattedYear=DateFormat.y().format(DateTime.now());
@@ -91,25 +87,7 @@ class _HomePageState extends State<HomePage> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(
-                        onPressed: (){
-                          DatePicker.showTimePicker(
-                              context,showSecondsColumn: false,
-                              onConfirm: (time){
-                                newTodo=Todo.create(
-                                    name:textEditingController.text,
-                                    createdAt:time);
-                              },
-                              theme:const DatePickerTheme(
-                                  doneStyle: TextStyle(
-                                      color: ColorConstants.titleColor,
-                                      fontWeight: FontWeight.w500
-                                  ),
-                                  headerColor: ColorConstants.scaffoldColor
-                              ) );
-                        },
-                        icon: Icon(Icons.date_range_outlined,
-                            size: 48.sp)),
+                    Spacer(),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -136,43 +114,6 @@ class _HomePageState extends State<HomePage> {
                             )
                         ),
                       ),
-                      SizedBox(
-                        height: 10.w,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 80,
-                            decoration: const BoxDecoration(
-                              color: ColorConstants.primaryColor,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  bottomLeft:Radius.circular(20)),
-                            ),
-                            child: time == null
-                                ? Center(child: Text('${DateTime.now().hour}'))
-                                : Center(child: Text('${time}')),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Container(
-                            height: 40,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              color: ColorConstants.titleColor.withOpacity(0.6),
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(20),
-                                  bottomRight:Radius.circular(20)),
-                            ),
-                            child: time == null
-                                ? Center(child: Text('${DateTime.now().minute}'))
-                                : Center(child: Text('${time}')),
-                          ),
-                        ],
-                      )
                     ],
                   ),
                 ),
@@ -180,11 +121,32 @@ class _HomePageState extends State<HomePage> {
                   TextButton(
                     child: const Text(TextConstants.ekle),
                     onPressed: () {
+                      newTodo=Todo.create(
+                          name:textEditingController.text,
+                          createdAt:DateTime.now());
                       BlocProvider.of<TodoBloc>(context).add(AddTodo(todo: newTodo));
                       Navigator.pop(context);
+
+
                     },
                   )
                 ],
               );
   }
 }
+
+//   DatePicker.showTimePicker(
+//                           context,showSecondsColumn: false,
+//                           onConfirm: (time){
+//                             newTodo=Todo.create(
+//                                 name:textEditingController.text,
+//                                 createdAt:DateTime.now());
+//                             BlocProvider.of<TodoBloc>(context).add(AddTodo(todo: newTodo));
+//                           },
+//                           theme:const DatePickerTheme(
+//                               doneStyle: TextStyle(
+//                                   color: ColorConstants.titleColor,
+//                                   fontWeight: FontWeight.w500
+//                               ),
+//                               headerColor: ColorConstants.scaffoldColor
+//                           ) );
