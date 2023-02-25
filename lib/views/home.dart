@@ -7,6 +7,7 @@ import 'package:todo_hive/extensions/string_extension.dart';
 import '../bloc/todo_bloc.dart';
 import '../constants/color_constants.dart';
 import '../model/todo.dart';
+import '../widgets/home/todo_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -55,10 +56,7 @@ class _HomePageState extends State<HomePage> {
                 physics: const BouncingScrollPhysics(),
                 itemCount: state.allTodos.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(state.allTodos[index].name.capitalize()),
-                    trailing: Text('${state.allTodos[index].createdAt.hour}:${state.allTodos[index].createdAt.minute}'),
-                  );
+                  return TodoCard(state:state.allTodos[index]);
                 });
           }
           return CircularProgressIndicator();
@@ -133,6 +131,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+
 //   DatePicker.showTimePicker(
 //                           context,showSecondsColumn: false,
 //                           onConfirm: (time){
@@ -148,3 +147,8 @@ class _HomePageState extends State<HomePage> {
 //                               ),
 //                               headerColor: ColorConstants.scaffoldColor
 //                           ) );
+
+//ListTile(
+//                     title: Text(state.allTodos[index].name.capitalize()),
+//                     trailing: Text('${state.allTodos[index].createdAt.hour}:${state.allTodos[index].createdAt.minute}'),
+//                   );
