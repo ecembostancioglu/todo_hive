@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_hive/constants/text_constants.dart';
+import 'package:todo_hive/extensions/string_extension.dart';
 import '../bloc/todo_bloc.dart';
 import '../constants/color_constants.dart';
 import '../model/todo.dart';
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                 itemCount: state.allTodos.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(state.allTodos[index].name),
+                    title: Text(state.allTodos[index].name.capitalize()),
                     trailing: Text('${state.allTodos[index].createdAt.hour}: ${state.allTodos[index].createdAt.minute}'),
                   );
                 });
