@@ -26,7 +26,7 @@ class TodoCard extends StatelessWidget {
             borderRadius:BorderRadius.circular(20),
               backgroundColor:ColorConstants.deleteColor,
               icon:Icons.delete,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
               onPressed: (context){
                 BlocProvider.of<TodoBloc>(context).add(DeleteTodo(todo: state));
               }),
@@ -43,22 +43,26 @@ class TodoCard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                margin: EdgeInsets.only(left: 10.w),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: state.isCompleted
-                      ? ColorConstants.todoCompleted
-                      :ColorConstants.todoNotCompleted
+              InkWell(
+                splashFactory: NoSplash.splashFactory,
+                onTap: (){},
+                child: Container(
+                  margin: EdgeInsets.only(left: 10.w),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: state.isCompleted
+                        ? ColorConstants.todoCompleted
+                        :ColorConstants.todoNotCompleted
+                  ),
+                  child: const Icon(Icons.check),
                 ),
-                child: const Icon(Icons.check),
               ),
               Padding(
                 padding: EdgeInsets.only(left: 10.w),
                 child: Text(state.name.toString().capitalize(),
                     style: Theme.of(context).textTheme.titleMedium),
               ),
-              Spacer(),
+              const Spacer(),
               Padding(
                 padding: EdgeInsets.only(right: 10.w),
                 child: Text('${state.createdAt.hour}:${state.createdAt.minute}',
