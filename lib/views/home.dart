@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_hive/constants/text_constants.dart';
-import 'package:todo_hive/extensions/string_extension.dart';
 import '../bloc/todo_bloc.dart';
 import '../constants/color_constants.dart';
 import '../model/todo.dart';
@@ -38,6 +37,61 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
+
+  AlertDialog buildAlertDialog(BuildContext context) {
+    return AlertDialog(
+      shape:RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20)
+      ),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Spacer(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(formattedDay,style:Theme.of(context).textTheme.headlineLarge),
+              Text(formattedMonth,style:Theme.of(context).textTheme.titleLarge),
+              Text(formattedYear,style:Theme.of(context).textTheme.titleMedium),
+            ],
+          ),
+        ],
+      ),
+      content: SizedBox(
+        height: 100.w,
+        child: Column(
+          children: [
+            TextField(
+              controller: textEditingController,
+              style: const TextStyle(
+                  color: ColorConstants.primaryColor
+              ),
+              decoration: const InputDecoration(
+                  hintText: TextConstants.gorevGiriniz,
+                  hintStyle: TextStyle(
+                      color: ColorConstants.hintTextColor
+                  )
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          child: const Text(TextConstants.ekle),
+          onPressed: () {
+            newTodo=Todo.create(
+                name:textEditingController.text,
+                createdAt:DateTime.now());
+            BlocProvider.of<TodoBloc>(context).add(AddTodo(todo: newTodo));
+            Navigator.pop(context);
+            textEditingController.clear();
+          },
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +113,8 @@ class _HomePageState extends State<HomePage> {
                   return TodoCard(state:state.allTodos[index]);
                 });
           }
-          return CircularProgressIndicator();
+          return const Center(
+              child: CircularProgressIndicator());
         },
       ),
 
@@ -77,58 +132,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  AlertDialog buildAlertDialog(BuildContext context) {
-    return AlertDialog(
-                shape:RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)
-                ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Spacer(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(formattedDay,style:Theme.of(context).textTheme.headlineLarge),
-                        Text(formattedMonth,style:Theme.of(context).textTheme.titleLarge),
-                        Text(formattedYear,style:Theme.of(context).textTheme.titleMedium),
-                      ],
-                    ),
-                  ],
-                ),
-                content: SizedBox(
-                  height: 100.w,
-                  child: Column(
-                    children: [
-                      TextField(
-                        controller: textEditingController,
-                        style: const TextStyle(
-                            color: ColorConstants.primaryColor
-                        ),
-                        decoration: const InputDecoration(
-                            hintText: TextConstants.gorevGiriniz,
-                            hintStyle: TextStyle(
-                                color: ColorConstants.hintTextColor
-                            )
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                actions: [
-                  TextButton(
-                    child: const Text(TextConstants.ekle),
-                    onPressed: () {
-                      newTodo=Todo.create(
-                          name:textEditingController.text,
-                          createdAt:DateTime.now());
-                      BlocProvider.of<TodoBloc>(context).add(AddTodo(todo: newTodo));
-                      Navigator.pop(context);
-                    },
-                  )
-                ],
-              );
-  }
 }
 
 
@@ -147,8 +150,3 @@ class _HomePageState extends State<HomePage> {
 //                               ),
 //                               headerColor: ColorConstants.scaffoldColor
 //                           ) );
-
-//ListTile(
-//                     title: Text(state.allTodos[index].name.capitalize()),
-//                     trailing: Text('${state.allTodos[index].createdAt.hour}:${state.allTodos[index].createdAt.minute}'),
-//                   );
