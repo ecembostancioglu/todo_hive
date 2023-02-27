@@ -72,8 +72,10 @@ class _TodoCardState extends State<TodoCard> {
                   child: widget.state.isDone
                       ? Text(widget.state.name.toString().capitalize(),
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        decoration: TextDecoration.lineThrough
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.titleMedium?.color,
+                        decoration: TextDecoration.lineThrough,
+                        fontSize: Theme.of(context).textTheme.titleMedium?.fontSize
                       ))
                       :Text(widget.state.name.toString().capitalize(),
                       overflow: TextOverflow.ellipsis,
