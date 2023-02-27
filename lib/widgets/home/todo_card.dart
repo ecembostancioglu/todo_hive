@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:hive/hive.dart';
 import 'package:todo_hive/constants/color_constants.dart';
 import 'package:todo_hive/extensions/string_extension.dart';
 import '../../bloc/todo_bloc.dart';
 
-class TodoCard extends StatelessWidget {
-  const TodoCard({
+class TodoCard extends StatefulWidget {
+   TodoCard({
     required this.state,
     Key? key,
   }) : super(key: key);
 
-  final dynamic state;
+   final dynamic state;
 
+   @override
+  State<TodoCard> createState() => _TodoCardState();
+}
+
+class _TodoCardState extends State<TodoCard> {
   @override
   Widget build(BuildContext context) {
     return Slidable(
@@ -28,7 +32,7 @@ class TodoCard extends StatelessWidget {
               icon:Icons.delete,
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
               onPressed: (context){
-                BlocProvider.of<TodoBloc>(context).add(DeleteTodo(todo: state));
+                BlocProvider.of<TodoBloc>(context).add(DeleteTodo(todo: widget.state));
               }),
         ],
       ),
@@ -45,27 +49,41 @@ class TodoCard extends StatelessWidget {
             children: [
               InkWell(
                 splashFactory: NoSplash.splashFactory,
-                onTap: (){},
+                onTap: (){
+                 setState(() {
+                   widget.state.isDone = !widget.state.isDone;
+                 });
+                },
                 child: Container(
                   margin: EdgeInsets.only(left: 10.w),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: state.isCompleted
+                    color: widget.state.isDone
                         ? ColorConstants.todoCompleted
-                        :ColorConstants.todoNotCompleted
+                        : ColorConstants.todoNotCompleted
                   ),
                   child: const Icon(Icons.check),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(left: 10.w),
-                child: Text(state.name.toString().capitalize(),
-                    style: Theme.of(context).textTheme.titleMedium),
+                child: SizedBox(
+                  width: 250.w,
+                  child: widget.state.isDone
+                      ? Text(widget.state.name.toString().capitalize(),
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        decoration: TextDecoration.lineThrough
+                      ))
+                      :Text(widget.state.name.toString().capitalize(),
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.titleMedium)
+                )
               ),
               const Spacer(),
               Padding(
                 padding: EdgeInsets.only(right: 10.w),
-                child: Text('${state.createdAt.hour}:${state.createdAt.minute}',
+                child: Text('${widget.state.createdAt.hour}:${widget.state.createdAt.minute}',
                     style: Theme.of(context).textTheme.titleMedium),
               ),
             ],

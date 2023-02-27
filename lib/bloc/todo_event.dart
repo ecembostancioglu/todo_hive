@@ -25,3 +25,4 @@ class DeleteTodo extends TodoEvent{
   @override
   List<Object?> get props => [todo];
 }
+

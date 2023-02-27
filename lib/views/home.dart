@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_hive/constants/text_constants.dart';
+import 'package:todo_hive/extensions/string_extension.dart';
 import '../bloc/todo_bloc.dart';
 import '../constants/color_constants.dart';
 import '../model/todo.dart';
@@ -83,6 +85,7 @@ class _HomePageState extends State<HomePage> {
             newTodo=Todo.create(
                 name:textEditingController.text,
                 createdAt:DateTime.now());
+
             BlocProvider.of<TodoBloc>(context).add(AddTodo(todo: newTodo));
             Navigator.pop(context);
             textEditingController.clear();
@@ -110,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                 physics: const BouncingScrollPhysics(),
                 itemCount: state.allTodos.length,
                 itemBuilder: (context, index) {
-                  return TodoCard(state:state.allTodos[index]);
+                  return TodoCard(state: state.allTodos[index]);
                 });
           }
           return const Center(
