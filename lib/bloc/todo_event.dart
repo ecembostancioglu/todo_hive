@@ -26,3 +26,11 @@ class DeleteTodo extends TodoEvent{
   List<Object?> get props => [todo];
 }
 
+class GetAllTodos extends TodoEvent{
+  final Todo todo;
+
+  GetAllTodos({required this.todo});
+
+  @override
+  List<Object?> get props => [todo];
+}

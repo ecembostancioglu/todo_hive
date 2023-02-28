@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_hive/constants/text_constants.dart';
+import 'package:todo_hive/data/local_storage.dart';
+import 'package:todo_hive/main.dart';
 import '../bloc/todo_bloc.dart';
 import '../constants/color_constants.dart';
 import '../model/todo.dart';
@@ -18,17 +20,28 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   late List<Todo> _allTodos;
+  late LocalStorage localStorage;
   TextEditingController textEditingController=TextEditingController();
   var newTodo;
+
 
   String formattedDay=DateFormat.d().format(DateTime.now());
   String formattedYear=DateFormat.y().format(DateTime.now());
   String formattedMonth=DateFormat.MMMM().format(DateTime.now());
 
+
+
+  void getAllTodoFromDb()async{
+    localStorage=locator<LocalStorage>();
+    _allTodos=await localStorage.getAllTodos();
+   setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
     _allTodos = <Todo>[];
+    getAllTodoFromDb();
   }
 
   @override
@@ -46,7 +59,7 @@ class _HomePageState extends State<HomePage> {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Spacer(),
+          const Spacer(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -79,12 +92,14 @@ class _HomePageState extends State<HomePage> {
       actions: [
         TextButton(
           child: const Text(TextConstants.ekle),
-          onPressed: () {
+          onPressed: () async{
             newTodo=Todo.create(
                 name:textEditingController.text,
                 createdAt:DateTime.now());
 
             BlocProvider.of<TodoBloc>(context).add(AddTodo(todo: newTodo));
+            await localStorage.addTodo(todo: newTodo);
+
             Navigator.pop(context);
             textEditingController.clear();
           },

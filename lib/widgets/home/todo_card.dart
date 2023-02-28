@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_hive/constants/color_constants.dart';
+import 'package:todo_hive/data/local_storage.dart';
 import 'package:todo_hive/extensions/string_extension.dart';
+import 'package:todo_hive/main.dart';
 import '../../bloc/todo_bloc.dart';
 
 class TodoCard extends StatefulWidget {
-   TodoCard({
+   const TodoCard({
     required this.state,
     Key? key,
   }) : super(key: key);
@@ -19,6 +21,15 @@ class TodoCard extends StatefulWidget {
 }
 
 class _TodoCardState extends State<TodoCard> {
+
+  late LocalStorage localStorage;
+
+  @override
+  void initState() {
+    localStorage=locator<LocalStorage>();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Slidable(
@@ -32,7 +43,8 @@ class _TodoCardState extends State<TodoCard> {
               icon:Icons.delete,
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
               onPressed: (context){
-                BlocProvider.of<TodoBloc>(context).add(DeleteTodo(todo: widget.state));
+              localStorage.deleteTodo(todo: widget.state);
+              BlocProvider.of<TodoBloc>(context).add(DeleteTodo(todo: widget.state));
               }),
         ],
       ),

@@ -1,9 +1,21 @@
+import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
-class Todo{
+part 'todo.g.dart';
+
+@HiveType(typeId: 1)
+class Todo extends HiveObject{
+
+   @HiveField(0)
    String id;
+
+   @HiveField(1)
    String name;
+
+   @HiveField(2)
    DateTime createdAt;
+
+   @HiveField(3)
    bool isDone;
 
   Todo({

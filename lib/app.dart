@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo_hive/bloc/todo_bloc.dart';
 import 'package:todo_hive/constants/color_constants.dart';
 import 'package:todo_hive/views/home.dart';
 
@@ -16,7 +14,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              iconTheme: IconThemeData(
+              iconTheme: const IconThemeData(
                 color: ColorConstants.titleColor,
               ),
                 textTheme: TextTheme(
