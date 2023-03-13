@@ -27,7 +27,7 @@ class DeleteTodo extends TodoEvent{
 }
 
 class GetAllTodos extends TodoEvent{
-  final Todo todo;
+  final List<Todo> todo;
 
   GetAllTodos({required this.todo});
 

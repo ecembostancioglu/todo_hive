@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   late List<Todo> _allTodos;
   late LocalStorage localStorage;
   TextEditingController textEditingController=TextEditingController();
-  var newTodo;
+  dynamic newTodo;
 
 
   String formattedDay=DateFormat.d().format(DateTime.now());
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   void getAllTodoFromDb()async{
     localStorage=locator<LocalStorage>();
     _allTodos=await localStorage.getAllTodos();
-   setState(() {});
+    BlocProvider.of<TodoBloc>(context).add(GetAllTodos(todo: _allTodos));
   }
 
   @override
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                 createdAt:DateTime.now());
 
             BlocProvider.of<TodoBloc>(context).add(AddTodo(todo: newTodo));
-            await localStorage.addTodo(todo: newTodo);
+           // await localStorage.addTodo(todo: newTodo);
 
             Navigator.pop(context);
             textEditingController.clear();
@@ -151,18 +151,3 @@ class _HomePageState extends State<HomePage> {
 }
 
 
-//   DatePicker.showTimePicker(
-//                           context,showSecondsColumn: false,
-//                           onConfirm: (time){
-//                             newTodo=Todo.create(
-//                                 name:textEditingController.text,
-//                                 createdAt:DateTime.now());
-//                             BlocProvider.of<TodoBloc>(context).add(AddTodo(todo: newTodo));
-//                           },
-//                           theme:const DatePickerTheme(
-//                               doneStyle: TextStyle(
-//                                   color: ColorConstants.titleColor,
-//                                   fontWeight: FontWeight.w500
-//                               ),
-//                               headerColor: ColorConstants.scaffoldColor
-//                           ) );

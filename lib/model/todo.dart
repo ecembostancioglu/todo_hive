@@ -32,4 +32,8 @@ class Todo extends HiveObject{
         isDone: false);
   }
 
+   void completedTodo() {
+     isDone = !isDone;
+   }
+
 }

@@ -21,15 +21,6 @@ class TodoCard extends StatefulWidget {
 }
 
 class _TodoCardState extends State<TodoCard> {
-
-  late LocalStorage localStorage;
-
-  @override
-  void initState() {
-    localStorage=locator<LocalStorage>();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Slidable(
@@ -43,7 +34,6 @@ class _TodoCardState extends State<TodoCard> {
               icon:Icons.delete,
               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
               onPressed: (context){
-              localStorage.deleteTodo(todo: widget.state);
               BlocProvider.of<TodoBloc>(context).add(DeleteTodo(todo: widget.state));
               }),
         ],
@@ -61,11 +51,7 @@ class _TodoCardState extends State<TodoCard> {
             children: [
               InkWell(
                 splashFactory: NoSplash.splashFactory,
-                onTap: (){
-                 setState(() {
-                   widget.state.isDone = !widget.state.isDone;
-                 });
-                },
+                onTap: null,
                 child: Container(
                   margin: EdgeInsets.only(left: 10.w),
                   decoration: BoxDecoration(

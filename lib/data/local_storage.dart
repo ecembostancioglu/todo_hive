@@ -4,7 +4,7 @@ import '../model/todo.dart';
 
 abstract class LocalStorage{
   Future<void> addTodo({required Todo todo});
-  Future<List<Todo>> getAllTodos();
+  List<Todo> getAllTodos();
   Future<bool> deleteTodo({required Todo todo});
 }
 
@@ -25,11 +25,12 @@ class HiveLocalStorage extends LocalStorage{
   @override
   Future<bool> deleteTodo({required Todo todo}) async {
     await todo.delete();
+    getAllTodos();
     return true;
   }
 
   @override
-  Future<List<Todo>> getAllTodos() async {
+  List<Todo> getAllTodos() {
     List<Todo> allTodos=<Todo>[];
     allTodos=_todoBox.values.toList();
 

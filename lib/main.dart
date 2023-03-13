@@ -38,6 +38,6 @@ Future<void> main() async{
 
   setup();
   runApp(BlocProvider(
-      create: (context)=> TodoBloc(),
+      create: (context)=> TodoBloc(locator.get()),
       child: MyApp()));
 }
