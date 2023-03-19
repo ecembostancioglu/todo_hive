@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:todo_hive/constants/text_constants.dart';
 import 'package:todo_hive/data/local_storage.dart';
 import 'package:todo_hive/main.dart';
+import 'package:todo_hive/widgets/home/custom_search_delegate.dart';
 import '../bloc/todo_bloc.dart';
 import '../constants/color_constants.dart';
 import '../model/todo.dart';
@@ -98,7 +99,6 @@ class _HomePageState extends State<HomePage> {
                 createdAt:DateTime.now());
 
             BlocProvider.of<TodoBloc>(context).add(AddTodo(todo: newTodo));
-           // await localStorage.addTodo(todo: newTodo);
 
             Navigator.pop(context);
             textEditingController.clear();
@@ -115,7 +115,9 @@ class _HomePageState extends State<HomePage> {
         title: const Text(TextConstants.appBarTitle),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                _showSearchPage();
+              },
               icon: const Icon(Icons.search)),
         ],
       ),
@@ -146,6 +148,10 @@ class _HomePageState extends State<HomePage> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  void _showSearchPage() {
+    showSearch(context: context, delegate: CustomSearchDelegate());
   }
 
 }

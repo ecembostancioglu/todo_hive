@@ -34,3 +34,13 @@ class GetAllTodos extends TodoEvent{
   @override
   List<Object?> get props => [todo];
 }
+
+class CompleteTodo extends TodoEvent {
+  final Todo todo;
+
+  CompleteTodo({required this.todo});
+
+  @override
+  List<Object?> get props => [todo];
+}
+

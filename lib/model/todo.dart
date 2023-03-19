@@ -32,7 +32,22 @@ class Todo extends HiveObject{
         isDone: false);
   }
 
-   void completedTodo() {
+   Todo copyWith({
+     String? id,
+     String? name,
+     DateTime? createdAt,
+     bool? isDone,
+   }) {
+     return Todo(
+       id: id ?? this.id,
+       name: name ?? this.name,
+       createdAt: createdAt ?? this.createdAt,
+       isDone: isDone ?? this.isDone,
+     );
+   }
+
+
+   void toggleDone() {
      isDone = !isDone;
    }
 

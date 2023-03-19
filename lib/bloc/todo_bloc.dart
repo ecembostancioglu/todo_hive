@@ -18,6 +18,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     on<AddTodo>(_addTodo);
     on<DeleteTodo>(_deleteTodo);
     on<GetAllTodos>(_getAllTodos);
+    on<CompleteTodo>(_completeTodo);
   }
 
   void _addTodo(AddTodo event,Emitter<TodoState> emit){
@@ -36,6 +37,17 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     final todos=localStorage.getAllTodos();
     emit(TodoState(allTodos: List.from(todos)));
   }
+
+  void _completeTodo(CompleteTodo event, Emitter<TodoState> emit) {
+    final state = this.state;
+    final updatedTodo = event.todo.copyWith(isDone: !event.todo.isDone);
+    localStorage.completedTodo(todo: updatedTodo);
+    final updatedAllTodos = List.from(state.allTodos);
+    final todoIndex = updatedAllTodos.indexWhere((todo) => todo.id == updatedTodo.id);
+    updatedAllTodos[todoIndex] = updatedTodo;
+    emit(TodoState(allTodos: List<Todo>.from(updatedAllTodos)));
+  }
+
 
 
 }

@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_hive/constants/color_constants.dart';
-import 'package:todo_hive/data/local_storage.dart';
 import 'package:todo_hive/extensions/string_extension.dart';
-import 'package:todo_hive/main.dart';
 import '../../bloc/todo_bloc.dart';
 
 class TodoCard extends StatefulWidget {
@@ -51,7 +49,9 @@ class _TodoCardState extends State<TodoCard> {
             children: [
               InkWell(
                 splashFactory: NoSplash.splashFactory,
-                onTap: null,
+                onTap: (){
+                  BlocProvider.of<TodoBloc>(context).add(CompleteTodo(todo: widget.state));
+                },
                 child: Container(
                   margin: EdgeInsets.only(left: 10.w),
                   decoration: BoxDecoration(

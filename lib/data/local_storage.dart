@@ -6,6 +6,7 @@ abstract class LocalStorage{
   Future<void> addTodo({required Todo todo});
   List<Todo> getAllTodos();
   Future<bool> deleteTodo({required Todo todo});
+  Future<void> completedTodo({required Todo todo});
 }
 
 
@@ -41,4 +42,13 @@ class HiveLocalStorage extends LocalStorage{
 
   }
 
-}
+  @override
+  Future<void> completedTodo({required Todo todo}) async{
+    final myTodo = _todoBox.get(todo.id);
+    if (myTodo != null) {
+      myTodo.toggleDone();
+      await _todoBox.put(todo.id, myTodo);
+
+    }
+  }
+  }
