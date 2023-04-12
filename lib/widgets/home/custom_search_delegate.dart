@@ -1,28 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:todo_hive/constants/text_constants.dart';
+import 'package:todo_hive/widgets/home/todo_card.dart';
+
+import '../../model/todo.dart';
 
 class CustomSearchDelegate extends SearchDelegate{
+
+  List<Todo> allTodos;
+
+  CustomSearchDelegate({required this.allTodos});
+
   @override
-  List<Widget>? buildActions(BuildContext context) {
-    // TODO: implement buildActions
-    throw UnimplementedError();
+  List<Widget> buildActions(BuildContext context) {
+
+    bool searchIcon=false;
+
+    return [
+      IconButton(
+          onPressed: (){
+           if(searchIcon==true){
+             query.isEmpty ? null : query=='';
+           }
+           else{
+             close(context,null);
+           }
+        },
+          icon:Icon(
+              Icons.clear,
+              color: Theme.of(context).primaryColor)),
+    ];
   }
 
   @override
   Widget? buildLeading(BuildContext context) {
-    // TODO: implement buildLeading
-    throw UnimplementedError();
+    return Container();
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    throw UnimplementedError();
+    List<Todo> filteredList=allTodos.where((todo)
+    => todo.name.toLowerCase().contains(query.toLowerCase())).toList();
+    return filteredList.isNotEmpty
+        ? ListView.builder(
+         physics: const BouncingScrollPhysics(),
+         itemCount: filteredList.length,
+         itemBuilder: (context, index) {
+          return TodoCard(state: filteredList[index]);
+        })
+        : Center(
+         child: Text(
+            TextConstants.arananGorevYok,
+            style: Theme.of(context).textTheme.titleMedium));
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-    throw UnimplementedError();
+    List<Todo> filteredList=allTodos.where((todo)
+    => todo.name.toLowerCase().contains(query.toLowerCase())).toList();
+    return filteredList.isNotEmpty
+        ? ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        itemCount: filteredList.length,
+        itemBuilder: (context, index) {
+          return TodoCard(state: filteredList[index]);
+
+        })
+        : Center(
+         child: Text(
+            TextConstants.arananGorevYok,
+            style: Theme.of(context).textTheme.titleMedium));
   }
 
 }

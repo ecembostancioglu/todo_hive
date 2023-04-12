@@ -7,16 +7,17 @@ import 'package:todo_hive/extensions/string_extension.dart';
 import '../../bloc/todo_bloc.dart';
 
 class TodoCard extends StatefulWidget {
-   const TodoCard({
+    TodoCard({
     required this.state,
     Key? key,
   }) : super(key: key);
 
-   final dynamic state;
+   dynamic state;
 
    @override
   State<TodoCard> createState() => _TodoCardState();
 }
+
 
 class _TodoCardState extends State<TodoCard> {
   @override

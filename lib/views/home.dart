@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   void getAllTodoFromDb()async{
     localStorage=locator<LocalStorage>();
     _allTodos=await localStorage.getAllTodos();
-    BlocProvider.of<TodoBloc>(context).add(GetAllTodos(todo: _allTodos));
+     BlocProvider.of<TodoBloc>(context).add(GetAllTodos(todo: _allTodos));
   }
 
   @override
@@ -150,8 +150,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _showSearchPage() {
-    showSearch(context: context, delegate: CustomSearchDelegate());
+  void _showSearchPage() async{
+    await showSearch(
+        context: context,
+        delegate: CustomSearchDelegate(allTodos: _allTodos));
+    getAllTodoFromDb();
   }
 
 }

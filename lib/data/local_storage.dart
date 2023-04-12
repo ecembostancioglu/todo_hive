@@ -26,7 +26,6 @@ class HiveLocalStorage extends LocalStorage{
   @override
   Future<bool> deleteTodo({required Todo todo}) async {
     await todo.delete();
-    getAllTodos();
     return true;
   }
 
