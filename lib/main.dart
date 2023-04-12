@@ -1,4 +1,5 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,13 +32,22 @@ Future<void> setupHive()async{
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
           statusBarColor: ColorConstants.transparent));
   await setupHive();
 
   setup();
-  runApp(BlocProvider(
+  runApp(
+      BlocProvider(
       create: (context)=> TodoBloc(locator.get()),
-      child: MyApp()));
+       child: EasyLocalization(
+         path: 'assets/translations',
+         supportedLocales:const [
+           Locale('en','US'),
+           Locale('tr','TR'),
+         ],
+           fallbackLocale: const Locale('en','US'),
+           child: MyApp())));
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_hive/constants/color_constants.dart';
@@ -12,6 +13,9 @@ class MyApp extends StatelessWidget {
       designSize:const Size(360, 690),
         builder: (context,widget){
           return MaterialApp(
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.deviceLocale,
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               iconTheme: const IconThemeData(
