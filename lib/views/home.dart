@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -80,9 +81,9 @@ class _HomePageState extends State<HomePage> {
               style: const TextStyle(
                   color: ColorConstants.primaryColor
               ),
-              decoration: const InputDecoration(
-                  hintText: TextConstants.gorevGiriniz,
-                  hintStyle: TextStyle(
+              decoration: InputDecoration(
+                  hintText: TextConstants.add_task.tr(),
+                  hintStyle:const TextStyle(
                       color: ColorConstants.hintTextColor
                   )
               ),
@@ -92,7 +93,7 @@ class _HomePageState extends State<HomePage> {
       ),
       actions: [
         TextButton(
-          child: const Text(TextConstants.ekle),
+          child: Text(TextConstants.add).tr(),
           onPressed: () async{
             newTodo=Todo.create(
                 name:textEditingController.text,
@@ -112,7 +113,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(TextConstants.appBarTitle),
+        title: Text(TextConstants.appBarTitle).tr(),
         actions: [
           IconButton(
               onPressed: () {

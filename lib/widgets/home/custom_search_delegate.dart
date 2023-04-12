@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_hive/constants/text_constants.dart';
 import 'package:todo_hive/widgets/home/todo_card.dart';
@@ -49,7 +50,7 @@ class CustomSearchDelegate extends SearchDelegate{
         })
         : Center(
          child: Text(
-            TextConstants.arananGorevYok,
+            TextConstants.no_search_found,
             style: Theme.of(context).textTheme.titleMedium));
   }
 
@@ -67,8 +68,8 @@ class CustomSearchDelegate extends SearchDelegate{
         })
         : Center(
          child: Text(
-            TextConstants.arananGorevYok,
-            style: Theme.of(context).textTheme.titleMedium));
+            TextConstants.no_search_found,
+            style: Theme.of(context).textTheme.titleMedium).tr());
   }
 
 }
